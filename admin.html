@@ -235,18 +235,35 @@ async function showDashboard(){
 document.getElementById('search').addEventListener('input', ()=> filterData());
 
 let allData = [];
-
+  
 async function loadData(){
   const tbody = document.querySelector('#dataTable tbody');
   tbody.innerHTML = "<tr><td colspan='7'>Loading...</td></tr>";
+
   try {
-    const res = await fetch(`${WEB_APP_URL}?admin_key=${ADMIN_KEY}`);
-    const data = await res.json();
-    if(!data.success){ tbody.innerHTML = `<tr><td colspan='7'>${data.message}</td></tr>`; return; }
-    allData = data.data || [];
+    const fd = new FormData();
+    fd.append('action', 'getRequests');
+    fd.append('admin_key', ADMIN_KEY);
+
+    const res = await fetch(WEB_APP_URL, { method: 'POST', body: fd });
+    const txt = await res.text();
+    let data;
+    try { data = JSON.parse(txt); } catch (e) {
+      tbody.innerHTML = "<tr><td colspan='7'>Invalid server response.</td></tr>";
+      console.log(txt);
+      return;
+    }
+
+    const rows = data.data || [];
+    if (!data.success || rows.length === 0) {
+      tbody.innerHTML = `<tr><td colspan='7'>${data.message || 'No records found.'}</td></tr>`;
+      return;
+    }
+
+    allData = rows;
     render(allData);
-  } catch {
-    tbody.innerHTML = "<tr><td colspan='7'>Error loading data.</td></tr>";
+  } catch (err) {
+    tbody.innerHTML = `<tr><td colspan='7'>Network error.</td></tr>`;
   }
 }
 
