@@ -247,15 +247,12 @@ async function loadData(){
 
     const res = await fetch(WEB_APP_URL, { method: 'POST', body: fd });
     const txt = await res.text();
-    let data;
-    try { data = JSON.parse(txt); } catch (e) {
-      tbody.innerHTML = "<tr><td colspan='7'>Invalid server response.</td></tr>";
-      console.log(txt);
-      return;
-    }
+    let data; 
+    try { data = JSON.parse(txt); } 
+    catch { console.log('Server said:', txt); tbody.innerHTML = "<tr><td colspan='7'>Invalid server response.</td></tr>"; return; }
 
     const rows = data.data || [];
-    if (!data.success || rows.length === 0) {
+    if (!data.success || rows.length === 0){
       tbody.innerHTML = `<tr><td colspan='7'>${data.message || 'No records found.'}</td></tr>`;
       return;
     }
@@ -263,7 +260,7 @@ async function loadData(){
     allData = rows;
     render(allData);
   } catch (err) {
-    tbody.innerHTML = `<tr><td colspan='7'>Network error.</td></tr>`;
+    tbody.innerHTML = "<tr><td colspan='7'>Network error.</td></tr>";
   }
 }
 
