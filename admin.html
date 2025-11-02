@@ -14,147 +14,43 @@
     --pending: #ffc107;
     --light-bg: #f5f8ff;
   }
-  body {
-    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-    margin: 0;
-    background: var(--light-bg);
-    color: #222;
-  }
+  body { font-family: 'Segoe UI', Roboto, Arial, sans-serif; margin:0; background:var(--light-bg); color:#222; }
   header {
-    background: var(--brand);
-    color: #fff;
-    padding: 14px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    background: var(--brand); color:#fff; padding:14px 20px; display:flex; justify-content:space-between; align-items:center;
+    position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,0.1);
   }
-  header h1 {
-    margin: 0;
-    font-size: 18px;
-    letter-spacing: 0.5px;
-  }
-  header button {
-    background: #fff;
-    color: var(--brand-dark);
-    border: none;
-    border-radius: 6px;
-    padding: 6px 14px;
-    cursor: pointer;
-    font-weight: 600;
-  }
-  header button:hover {
-    background: var(--brand-dark);
-    color: #fff;
-  }
+  header h1 { margin:0; font-size:18px; letter-spacing:0.5px; }
+  header button { background:#fff; color:var(--brand-dark); border:none; border-radius:6px; padding:6px 14px; cursor:pointer; font-weight:600; }
+  header button:hover { background:var(--brand-dark); color:#fff; }
   .container {
-    max-width: 1100px;
-    margin: 30px auto;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    padding: 20px;
+    max-width:1100px; margin:30px auto; background:#fff; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.08); padding:20px;
   }
-  h2 {
-    margin-top: 0;
-    color: var(--brand);
-  }
-  input, button {
-    font-family: inherit;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-  }
-  th, td {
-    padding: 10px;
-    border-bottom: 1px solid #e0e0e0;
-    text-align: left;
-    font-size: 14px;
-  }
-  th {
-    background: #eef4ff;
-    color: var(--brand-dark);
-    font-weight: 600;
-  }
-  tr:hover {
-    background: #f9fbff;
-  }
-  .status {
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-    display: inline-block;
-  }
-  .status.pending { background: var(--pending); color: #000; }
-  .status.approved { background: #d4edda; color: #155724; }
-  .status.rejected { background: #f8d7da; color: #721c24; }
-  .btn {
-    padding: 6px 12px;
-    border-radius: 6px;
-    border: none;
-    font-weight: 600;
-    cursor: pointer;
-    color: #fff;
-  }
-  .btn.approve { background: var(--success); }
-  .btn.reject { background: var(--danger); }
-  .btn.approve:hover { background: #218838; }
-  .btn.reject:hover { background: #c82333; }
-  .search-bar {
-    margin-bottom: 10px;
-    display: flex;
-    gap: 8px;
-    align-items: center;
-  }
-  .search-bar input {
-    flex: 1;
-    padding: 8px 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-  }
+  h2 { margin-top:0; color:var(--brand); }
+  input, button { font-family:inherit; }
+  table { width:100%; border-collapse:collapse; margin-top:15px; }
+  th, td { padding:10px; border-bottom:1px solid #e0e0e0; text-align:left; font-size:14px; vertical-align:top; }
+  th { background:#eef4ff; color:var(--brand-dark); font-weight:600; }
+  tr:hover { background:#f9fbff; }
+  .status { padding:4px 10px; border-radius:20px; font-size:12px; font-weight:600; display:inline-block; }
+  .status.pending { background:var(--pending); color:#000; }
+  .status.approved { background:#d4edda; color:#155724; }
+  .status.rejected { background:#f8d7da; color:#721c24; }
+  .btn { padding:6px 12px; border-radius:6px; border:none; font-weight:600; cursor:pointer; color:#fff; }
+  .btn.approve { background:var(--success); }
+  .btn.reject { background:var(--danger); }
+  .btn.approve:hover { background:#218838; }
+  .btn.reject:hover { background:#c82333; }
+  .btn[disabled] { opacity:.6; cursor:not-allowed; }
+  .search-bar { margin-bottom:10px; display:flex; gap:8px; align-items:center; }
+  .search-bar input { flex:1; padding:8px 10px; border:1px solid #ccc; border-radius:6px; }
   .login {
-    max-width: 360px;
-    margin: 100px auto;
-    background: #fff;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    text-align: center;
+    max-width:360px; margin:100px auto; background:#fff; padding:25px; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.1); text-align:center;
   }
-  .login h2 {
-    margin-bottom: 20px;
-    color: var(--brand);
-  }
-  .login input {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-  }
-  .login button {
-    background: var(--brand);
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    padding: 10px;
-    width: 100%;
-    font-weight: 600;
-    cursor: pointer;
-  }
-  .login button:hover {
-    background: var(--brand-dark);
-  }
-  .muted {
-    color: #888;
-    font-size: 13px;
-  }
+  .login h2 { margin-bottom:20px; color:var(--brand); }
+  .login input { width:100%; padding:10px; margin:8px 0; border-radius:6px; border:1px solid #ccc; }
+  .login button { background:var(--brand); color:#fff; border:none; border-radius:6px; padding:10px; width:100%; font-weight:600; cursor:pointer; }
+  .login button:hover { background:var(--brand-dark); }
+  .muted { color:#888; font-size:13px; }
 </style>
 </head>
 <body>
@@ -177,7 +73,7 @@
     <h2>Student Requests</h2>
     <div class="search-bar">
       <input id="search" placeholder="Search by roll no, name, or email">
-      <button onclick="loadData()" class="btn approve" style="background:var(--brand);">🔄 Refresh</button>
+      <button id="refreshBtn" onclick="loadData()" class="btn approve" style="background:var(--brand);">🔄 Refresh</button>
     </div>
 
     <table id="dataTable">
@@ -199,7 +95,7 @@
 
 <script>
 /* ⚙️ CONFIG */
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwpNCp9hVPxDmt-E9_B_dcd29TrKVV54dmyH_25lnsC-ZneBZEFRr7F-yjsrq-Kkrrc_Q/exec"; // <-- Paste your Google Apps Script URL
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwpNCp9hVPxDmt-E9_B_dcd29TrKVV54dmyH_25lnsC-ZneBZEFRr7F-yjsrq-Kkrrc_Q/exec"; // your Apps Script /exec
 const ADMIN_KEY = "admin123"; // must match Code.gs
 const ADMIN_USER = "admin";
 const ADMIN_PASS = "password";
@@ -217,12 +113,10 @@ function login(){
     msg.textContent = "Invalid credentials.";
   }
 }
-
 function logout(){
   sessionStorage.removeItem('logged');
   location.reload();
 }
-
 if(sessionStorage.getItem('logged') === '1') showDashboard();
 
 /* 🧾 DASHBOARD */
@@ -231,14 +125,15 @@ async function showDashboard(){
   document.getElementById('dashboard').style.display='block';
   loadData();
 }
-
 document.getElementById('search').addEventListener('input', ()=> filterData());
 
 let allData = [];
-  
+
 async function loadData(){
   const tbody = document.querySelector('#dataTable tbody');
+  const refreshBtn = document.getElementById('refreshBtn');
   tbody.innerHTML = "<tr><td colspan='7'>Loading...</td></tr>";
+  refreshBtn.disabled = true;
 
   try {
     const fd = new FormData();
@@ -254,6 +149,7 @@ async function loadData(){
     const rows = data.data || [];
     if (!data.success || rows.length === 0){
       tbody.innerHTML = `<tr><td colspan='7'>${data.message || 'No records found.'}</td></tr>`;
+      allData = [];
       return;
     }
 
@@ -261,16 +157,21 @@ async function loadData(){
     render(allData);
   } catch (err) {
     tbody.innerHTML = "<tr><td colspan='7'>Network error.</td></tr>";
+  } finally {
+    refreshBtn.disabled = false;
   }
 }
 
 function filterData(){
   const q = document.getElementById('search').value.toLowerCase();
   const filtered = allData.filter(r => 
-    (r.roll_no + r.name + r.email).toLowerCase().includes(q)
+    (`${r.roll_no} ${r.name} ${r.email}`).toLowerCase().includes(q)
   );
   render(filtered);
 }
+
+// simple HTML escaper to avoid any weird text breaking HTML
+function escapeHTML(s){return (s||'').toString().replace(/[&<>"']/g,m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m]))}
 
 function render(rows){
   const tbody = document.querySelector('#dataTable tbody');
@@ -280,16 +181,17 @@ function render(rows){
   }
 
   tbody.innerHTML = rows.map(r=>{
-    const stClass = r.status.toLowerCase();
+    const status = (r.status || '').toString();
+    const stClass = status.toLowerCase().replace(/[^a-z]/g,''); // e.g. "Approved" -> "approved"
     const when = r.requested_at ? new Date(r.requested_at).toLocaleString() : '-';
     return `
     <tr>
-      <td>${r.roll_no}</td>
-      <td>${r.name}</td>
-      <td>${r.email}</td>
-      <td>${r.course} (${r.year})</td>
-      <td><span class="status ${stClass}">${r.status}</span></td>
-      <td>${when}</td>
+      <td>${escapeHTML(r.roll_no)}</td>
+      <td>${escapeHTML(r.name)}</td>
+      <td>${escapeHTML(r.email)}</td>
+      <td>${escapeHTML(r.course)} (${escapeHTML(r.passing_year)})</td>
+      <td><span class="status ${stClass}">${escapeHTML(status)}</span></td>
+      <td>${escapeHTML(when)}</td>
       <td>
         <button class="btn approve" onclick="updateStatus(${r.row}, 'Approved')">Approve</button>
         <button class="btn reject" onclick="updateStatus(${r.row}, 'Rejected')">Reject</button>
@@ -308,10 +210,19 @@ async function updateStatus(row, status){
   fd.append('status', status);
   fd.append('remarks', remarks);
 
-  const res = await fetch(WEB_APP_URL, { method: 'POST', body: fd });
-  const data = await res.json();
-  alert(data.message);
-  loadData();
+  // disable all action buttons briefly to prevent double-clicks
+  document.querySelectorAll('.btn.approve,.btn.reject').forEach(b=>b.disabled=true);
+
+  try{
+    const res = await fetch(WEB_APP_URL, { method: 'POST', body: fd });
+    const data = await res.json().catch(()=>({success:false,message:'Bad JSON'}));
+    alert(data.message || (data.success ? 'Updated' : 'Failed'));
+    await loadData();
+  }catch(e){
+    alert('Network error.');
+  }finally{
+    document.querySelectorAll('.btn.approve,.btn.reject').forEach(b=>b.disabled=false);
+  }
 }
 </script>
 </body>
