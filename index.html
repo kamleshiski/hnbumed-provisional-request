@@ -5,247 +5,151 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Provisional Document Request – HNBU Medical Education University</title>
   <meta name="description" content="Request your provisional document. Verification may take up to 48 hours."/>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <style>
     :root{
-      --brand:#0b5cab;
-      --brand-dark:#084c8e;
-      --bg-overlay: rgba(0,0,0,0.45);
-      --card-bg: #ffffff;
-      --success-bg:#d4edda;
-      --success-fg:#155724;
-      --error-bg:#f8d7da;
-      --error-fg:#721c24;
+      --brand:#0b5cab; --brand-dark:#084c8e; --bg-overlay:rgba(0,0,0,0.45);
+      --card-bg:#ffffff; --success-bg:#d4edda; --success-fg:#155724;
+      --error-bg:#f8d7da; --error-fg:#721c24;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{
-      margin:0;
-      font-family: "Segoe UI", Roboto, Arial, sans-serif;
-      color:#222;
-      background: var(--brand);
-    }
-    /* full-bleed background image with overlay */
-    .bg{
-      position: fixed; inset:0;
-      background: url("https://i.postimg.cc/m2x9tZx5/Hemwati-Nandan-Bahuguna-Uttarakhand-Medical-Education-University-1.png") center/cover no-repeat;
-      filter: none;
-    }
-    .overlay{
-      position: fixed; inset:0;
-      background: var(--bg-overlay);
-    }
-
-    /* page content */
-    .page{
-      position: relative;
-      min-height:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      flex-direction: column;
-      padding: 24px;
-      text-align: center;
-    }
-
-    /* header (logo + college name) */
-    .header{
-      color:#fff;
-      margin-bottom:20px;
-    }
-    .brand-row{
-      display:flex;
-      flex-direction: column;
-      align-items:center;
-      justify-content:center;
-      gap:12px;
-    }
-    .logo{
-      width:80px; height:80px; border-radius:50%;
-      background:#fff; display:flex; align-items:center; justify-content:center;
-      overflow:hidden; border:3px solid rgba(255,255,255,0.6);
-    }
-    .logo img{width:100%; height:100%; object-fit:cover}
-    .college{
-      font-weight:800; letter-spacing:.5px; line-height:1.3;
-      text-transform: uppercase;
-      font-size: clamp(16px, 2vw + 12px, 24px);
-      max-width: 90%;
-    }
-    .college .line2{display:block; font-weight:700; opacity:.95}
-
-    /* card */
-    .card{
-      width:100%; max-width:520px;
-      background: var(--card-bg);
-      border-radius:16px;
-      box-shadow: 0 18px 40px rgba(0,0,0,.35);
-      padding:22px;
-      animation: rise .5s ease forwards;
-    }
-    @keyframes rise{from{transform:translateY(14px); opacity:.0} to{transform:none; opacity:1}}
-
-    .title{
-      margin:0 0 6px; text-align:center; color:#222; font-size:22px; font-weight:700;
-    }
-    .subtitle{
-      margin:0 0 16px; text-align:center; color:#555; font-size:14px;
-    }
-
-    form{display:grid; gap:12px; margin-top:4px}
-    input, select, button{
-      width:100%;
-      padding:12px 12px;
-      border:1px solid #dcdcdc;
-      border-radius:10px;
-      font-size:15px;
-      transition:.2s;
-      background:#fff;
-    }
-    input:focus, select:focus{
-      outline:none; border-color: var(--brand);
-      box-shadow: 0 0 0 4px rgba(11,92,171,.12);
-    }
-    .readonly{
-      background:#f8f9fb; color:#333; border-style:dashed;
-    }
-    button{
-      background: var(--brand);
-      color:#fff; font-weight:700; border:none; cursor:pointer;
-      transform: translateZ(0);
-    }
-    button:hover{ background: var(--brand-dark) }
-    button:disabled{ opacity:.6; cursor:not-allowed }
-
-    .helper{font-size:12.5px; color:#666; margin-top:-6px}
-    .badge{
-      display:inline-block; padding:6px 10px; font-size:12.5px;
-      border-radius:999px; background:#eef2ff; color:#3b4cca; font-weight:600;
-    }
-
-    .status{display:none; margin-top:10px; padding:10px; border-radius:10px; text-align:center; font-weight:600}
-    .status.success{display:block; background:var(--success-bg); color:var(--success-fg)}
-    .status.error{display:block; background:var(--error-bg); color:var(--error-fg)}
-
-    .spinner{
-      display:none; margin:8px auto 0; width:28px; height:28px;
-      border:4px solid #eee; border-top-color: var(--brand); border-radius:50%;
-      animation: spin 1s linear infinite;
-    }
-    .loading .spinner{display:block}
-    @keyframes spin{to{transform:rotate(360deg)}}
-
-    .footer{
-      text-align:center; color:#ddd; font-size:12px; margin-top:20px;
-    }
+    body{margin:0;font-family:"Segoe UI",Roboto,Arial,sans-serif;color:#222;background:var(--brand);}
+    .bg{position:fixed;inset:0;background:url("https://i.postimg.cc/m2x9tZx5/Hemwati-Nandan-Bahuguna-Uttarakhand-Medical-Education-University-1.png") center/cover no-repeat;}
+    .overlay{position:fixed;inset:0;background:var(--bg-overlay);}
+    .page{position:relative;min-height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:24px;text-align:center;}
+    .header{color:#fff;margin-bottom:20px;}
+    .brand-row{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;}
+    .logo{width:80px;height:80px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;border:3px solid rgba(255,255,255,0.6);}
+    .logo img{width:100%;height:100%;object-fit:cover;}
+    .college{font-weight:800;letter-spacing:.5px;line-height:1.3;text-transform:uppercase;font-size:clamp(16px,2vw + 12px,24px);max-width:90%;}
+    .college .line2{display:block;font-weight:700;opacity:.95;}
+    .card{width:100%;max-width:520px;background:var(--card-bg);border-radius:16px;box-shadow:0 18px 40px rgba(0,0,0,.35);padding:22px;}
+    .title{margin:0 0 6px;text-align:center;color:#222;font-size:22px;font-weight:700;}
+    .subtitle{margin:0 0 16px;text-align:center;color:#555;font-size:14px;}
+    form{display:grid;gap:12px;margin-top:4px;}
+    input,select,button{width:100%;padding:12px;border:1px solid #dcdcdc;border-radius:10px;font-size:15px;transition:.2s;background:#fff;}
+    input:focus,select:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 4px rgba(11,92,171,.12);}
+    .readonly{background:#f8f9fb;color:#333;border-style:dashed;}
+    button{background:var(--brand);color:#fff;font-weight:700;border:none;cursor:pointer;transition:background .3s,transform .2s;}
+    button:hover{background:var(--brand-dark);transform:scale(1.05);}
+    button:disabled{opacity:.6;cursor:not-allowed;}
+    .status{display:none;margin-top:10px;padding:10px;border-radius:10px;text-align:center;font-weight:600;}
+    .status.success{display:block;background:var(--success-bg);color:var(--success-fg);}
+    .status.error{display:block;background:var(--error-bg);color:var(--error-fg);}
+    .footer{text-align:center;color:#ddd;font-size:12px;margin-top:20px;}
+    #popup{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;}
+    #popupContent{background:#fff;padding:20px 30px;border-radius:14px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.3);}
   </style>
 </head>
 <body>
-  <div class="bg" aria-hidden="true"></div>
-  <div class="overlay" aria-hidden="true"></div>
-
+  <div class="bg"></div><div class="overlay"></div>
   <div class="page">
     <div class="header">
       <div class="brand-row">
-        <div class="logo">
-          <img src="https://i.postimg.cc/Mp5z25mS/Untitled-design-1.png" alt="University Logo"/>
-        </div>
-        <div class="college">
-          HEMWATI NANDAN BAHUGUNA UTTARAKHAND
-          <span class="line2">MEDICAL EDUCATION UNIVERSITY</span>
-        </div>
+        <div class="logo"><img src="https://i.postimg.cc/Mp5z25mS/Untitled-design-1.png" alt="University Logo"/></div>
+        <div class="college">HEMWATI NANDAN BAHUGUNA UTTARAKHAND<span class="line2">MEDICAL EDUCATION UNIVERSITY</span></div>
       </div>
     </div>
 
-    <div class="card" id="card">
+    <div class="card">
       <h1 class="title">Provisional Document Request</h1>
-      <p class="subtitle">
-        Please fill your details. <span class="badge">Verification within ~48 hours</span>
-      </p>
+      <p class="subtitle">Fill in your details and complete the payment to submit your request.</p>
 
       <form id="requestForm" novalidate>
-        <div>
-          <input type="text" name="roll_no" placeholder="Roll Number" required inputmode="numeric" autocomplete="off"/>
-        </div>
-
-        <div>
-          <input type="text" name="name" placeholder="Full Name (as per records)" required autocomplete="name"/>
-        </div>
-
-        <div>
-          <input type="email" name="email" placeholder="Email (for delivery link)" required autocomplete="email"/>
-        </div>
-
-        <!-- Only provisional document is available -->
-        <div>
-          <input class="readonly" value="Provisional Document" aria-label="Document Type" readonly/>
-          <input type="hidden" name="document_type" value="Provisional"/>
-          <div class="helper">Only provisional document is available at the moment.</div>
-        </div>
-
-        <button id="submitBtn" type="submit">Submit Request</button>
-
-        <div class="spinner" id="spinner" aria-hidden="true"></div>
-        <div id="status" class="status" role="status" aria-live="polite"></div>
+        <input type="text" name="roll_no" placeholder="Roll Number" required>
+        <input type="text" name="name" placeholder="Full Name" required>
+        <input type="text" name="father_name" placeholder="Father's Name" required>
+        <input type="text" name="college_name" placeholder="College Name" required>
+        <input type="text" name="course" placeholder="Course (e.g. MBBS, Nursing)" required>
+        <input type="number" name="passing_year" placeholder="Passing Year" required min="1900" max="2100">
+        <input type="email" name="email" placeholder="Email (for delivery link)" required>
+        <input class="readonly" value="Provisional Document" readonly>
+        <input type="hidden" name="document_type" value="Provisional">
+        <button type="button" id="payBtn">Proceed to Payment</button>
+        <div id="status" class="status"></div>
       </form>
     </div>
 
-    <div class="footer">©
-      <script>document.write(new Date().getFullYear())</script>
-      HNBU Medical Education University
+    <div class="footer">© <script>document.write(new Date().getFullYear())</script> HNBU Medical Education University</div>
+  </div>
+
+  <!-- Popup for success message -->
+  <div id="popup">
+    <div id="popupContent">
+      <h2>✅ Payment Successful</h2>
+      <p>Your request has been accepted.<br>You will receive your document link once verified.</p>
+      <button onclick="closePopup()">OK</button>
     </div>
   </div>
 
- <script>
-  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzxb4FUB6aDbv4IzEeuY7dCpN58c3-U4Z6whvjB0n5D1bAgV47thhXTv1BJGcXNL4Bl/exec"; 
+  <script>
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwpNCp9hVPxDmt-E9_B_dcd29TrKVV54dmyH_25lnsC-ZneBZEFRr7F-yjsrq-Kkrrc_Q/exec";
+    const RAZORPAY_KEY = "rzp_test_RavafcyAvnSfBC"; // 🔑 Replace with your Razorpay Test Key ID
+    const payBtn = document.getElementById("payBtn");
+    const form = document.getElementById("requestForm");
+    const statusBox = document.getElementById("status");
+    const popup = document.getElementById("popup");
 
-  const form = document.getElementById("requestForm");
-  const btn = document.getElementById("submitBtn");
-  const spinner = document.getElementById("spinner");
-  const statusBox = document.getElementById("status");
-
-  function setLoading(isLoading){
-    btn.disabled = isLoading;
-    spinner.style.display = isLoading ? "block" : "none";
-  }
-  function showStatus(msg, ok=true){
-    statusBox.textContent = msg;
-    statusBox.className = "status " + (ok ? "success" : "error");
-  }
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    showStatus("", true);
-    statusBox.className = "status";
-    setLoading(true);
-
-    const formData = new FormData(form);
-
-    try {
-      const res = await fetch(WEB_APP_URL, {
-        method: "POST",
-        body: formData   // ✅ send as form-data, no headers
-      });
-
-      const text = await res.text();
-      let result;
-      try { 
-        result = JSON.parse(text); 
-      } catch { 
-        result = { success: res.ok, message: res.ok ? "Request submitted!" : "Submission failed." }; 
-      }
-
-      if(result.success){
-        showStatus("Request submitted successfully. You’ll receive an email after verification.");
-        form.reset();
-      } else {
-        showStatus(result.message || "Something went wrong. Please try again.", false);
-      }
-    } catch (err) {
-      showStatus("Network error. Please check your connection and try again.", false);
-    } finally {
-      setLoading(false);
+    function showStatus(msg, ok = true) {
+      statusBox.textContent = msg;
+      statusBox.className = "status " + (ok ? "success" : "error");
+      statusBox.style.display = "block";
     }
-  });
-</script>
+
+    function openPopup() {
+      popup.style.display = "flex";
+    }
+    function closePopup() {
+      popup.style.display = "none";
+    }
+
+    payBtn.addEventListener("click", async () => {
+      const data = Object.fromEntries(new FormData(form));
+      if (!data.roll_no || !data.name || !data.email) {
+        showStatus("Please fill all required fields before payment.", false);
+        return;
+      }
+
+      const options = {
+        key: RAZORPAY_KEY,
+        amount: 100 * 100, // ₹100 in paise
+        currency: "INR",
+        name: "HNBU Medical Education University",
+        description: "Provisional Document Request Fee",
+        image: "https://i.postimg.cc/Mp5z25mS/Untitled-design-1.png",
+        handler: async function (response) {
+          // Payment successful — send data to Google Apps Script
+          await submitRequest(data, response.razorpay_payment_id);
+          openPopup();
+          form.reset();
+        },
+        prefill: {
+          name: data.name,
+          email: data.email
+        },
+        theme: { color: "#0b5cab" }
+      };
+
+      const rzp = new Razorpay(options);
+      rzp.open();
+    });
+
+    async function submitRequest(data, paymentId) {
+      data.payment_id = paymentId;
+      const formData = new FormData();
+      for (const key in data) formData.append(key, data[key]);
+
+      try {
+        const res = await fetch(WEB_APP_URL, { method: "POST", body: formData });
+        const text = await res.text();
+        let result;
+        try { result = JSON.parse(text); } catch { result = { success: res.ok }; }
+        if (!result.success) showStatus("Error saving your request.", false);
+      } catch (err) {
+        showStatus("Network error. Please try again later.", false);
+      }
+    }
+  </script>
 </body>
 </html>
