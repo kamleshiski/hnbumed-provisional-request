@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel – HNBU</title>
+<style>
+  body{font-family:Arial, sans-serif;background:#f4f6fb;margin:0;padding:20px}
+  .login, .dashboard{max-width:600px;margin:50px auto;background:#fff;padding:20px;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,0.1);}
+  h2{margin-top:0;color:#0b5cab}
+  input,button{width:100%;padding:10px;margin:8px 0;font-size:15px}
+  button{background:#0b5cab;color:#fff;border:none;cursor:pointer;border-radius:6px}
+  button:hover{background:#094c8e}
+  table{width:100%;border-collapse:collapse;margin-top:20px}
+  th,td{border:1px solid #ddd;padding:8px;text-align:left}
+  th{background:#0b5cab;color:#fff}
+  tr:nth-child(even){background:#f2f2f2}
+</style>
+</head>
+<body>
+
+<div class="login" id="loginBox">
+  <h2>Admin Login</h2>
+  <input id="username" placeholder="Username" required>
+  <input id="password" type="password" placeholder="Password" required>
+  <button onclick="login()">Login</button>
+  <p id="msg" style="color:red"></p>
+</div>
+
+<div class="dashboard" id="dashboard" style="display:none;">
+  <h2>Requests Dashboard</h2>
+  <button onclick="logout()" style="float:right;">Logout</button>
+  <table id="dataTable">
+    <thead>
+      <tr><th>Roll No</th><th>Name</th><th>Email</th><th>Status</th><th>Action</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+<script>
+const WEB_APP_URL = "YOUR_WEB_APP_URL_HERE"; // <-- paste your /exec link
+const ADMIN_KEY = "admin123"; // same as Code.gs
+const ADMIN_USER = "admin";
+const ADMIN_PASS = "password";
+
+function login(){
+  const u = document.getElementById('username').value.trim();
+  const p = document.getElementById('password').value.trim();
+  if(u === ADMIN_USER && p === ADMIN_PASS){
+    sessionStorage.setItem('logged', '1');
+    showDashboard();
+  } else {
+    document.getElementById('msg').textContent = "Invalid credentials.";
+  }
+}
+
+function logout(){
+  sessionStorage.removeItem('logged');
+  location.reload();
+}
+
+if(sessionStorage.getItem('logged') === '1') showDashboard();
+
+async function showDashboard(){
+  document.getElementById('loginBox').style.display='none';
+  document.getElementById('dashboard').style.display='block';
+  loadRequests();
+}
+
+async function loadRequests(){
+  const url = `${WEB_APP_URL}?admin_key=${ADMIN_KEY}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  const tbody = document.querySelector('#dataTable tbody');
+  tbody.innerHTML = '';
+
+  if(!data.success){ 
+    tbody.innerHTML = `<tr><td colspan='5'>${data.message}</td></tr>`;
+    return;
+  }
+
+  data.data.forEach(r=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${r.roll_no}</td>
+      <td>${r.name}</td>
+      <td>${r.email}</td>
+      <td>${r.status}</td>
+      <td>
+        <button onclick="updateStatus(${r.row}, 'Approved')">Approve</button>
+        <button onclick="updateStatus(${r.row}, 'Rejected')">Reject</button>
+      </td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+async function updateStatus(row, status){
+  const remarks = prompt("Any remarks?") || '';
+  const fd = new FormData();
+  fd.append('action','update');
+  fd.append('admin_key', ADMIN_KEY);
+  fd.append('row', row);
+  fd.append('status', status);
+  fd.append('remarks', remarks);
+
+  const res = await fetch(WEB_APP_URL, {method:'POST', body:fd});
+  const data = await res.json();
+  alert(data.message);
+  loadRequests();
+}
+</script>
+</body>
+</html>
