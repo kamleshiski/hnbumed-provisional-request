@@ -3,265 +3,136 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Admin Dashboard | HNBU Medical Education University</title>
+<title>Admin Access | HNBU Medical Education University</title>
 
 <style>
   :root{
     --brand:#0b5cab;
     --brand-dark:#084c8e;
-    --success:#28a745;
-    --danger:#dc3545;
-    --card-bg: rgba(255,255,255,0.9);
+    --card-bg: rgba(255,255,255,0.92);
     --border:#e6e9f0;
-    --text:#1f2937;
+    --text:#0f172a;
     --muted:#6b7280;
   }
   *{box-sizing:border-box}
-  html,body{height:100%}
+  html,body{height:100%;margin:0;font-family:"Segoe UI",Roboto,Arial,sans-serif;color:var(--text)}
   body{
-    margin:0;
-    font-family: "Segoe UI", Roboto, Arial, sans-serif;
-    color:var(--text);
-    background: url("https://i.postimg.cc/W18XqDmJ/premium-photo-1661302846246-e8faef18255d.jpg") center/cover fixed no-repeat;
+    background:url("https://i.postimg.cc/W18XqDmJ/premium-photo-1661302846246-e8faef18255d.jpg") center/cover fixed no-repeat;
   }
-  /* soft overlay */
-  .overlay{position:fixed; inset:0; background:rgba(10,20,40,.45)}
-  /* centered shell */
-  .page{
-    position:relative; min-height:100%;
-    display:flex; align-items:center; justify-content:center;
-    padding:24px;
-  }
-  /* card */
+  .overlay{position:fixed;inset:0;background:rgba(10,20,40,.45)}
+  .page{position:relative;min-height:100%;display:flex;align-items:center;justify-content:center;padding:24px}
+
+  /* Card */
   .card{
-    width:100%; max-width:1080px;
-    background:var(--card-bg); backdrop-filter: blur(6px);
-    border:1px solid var(--border);
-    border-radius:16px;
-    box-shadow: 0 20px 60px rgba(0,0,0,.25);
-    overflow:hidden;
+    width:100%;max-width:440px;
+    background:var(--card-bg);backdrop-filter:blur(6px);
+    border:1px solid var(--border);border-radius:16px;
+    box-shadow:0 22px 60px rgba(0,0,0,.28);
+    padding:28px 26px;text-align:center;
   }
-  .card-header{
-    padding:16px 20px;
-    display:flex; align-items:center; justify-content:space-between;
-    background:linear-gradient(180deg, #ffffffcc, #ffffffb3);
-    border-bottom:1px solid var(--border);
-  }
-  .title{
-    margin:0; font-size:18px; font-weight:800; letter-spacing:.3px; color:#0b275b;
-  }
-  .logout{
-    background:var(--brand); color:#fff; border:none; border-radius:10px;
-    padding:8px 14px; font-weight:700; cursor:pointer;
-  }
-  .logout:hover{ background:var(--brand-dark) }
+  .title{margin:0 0 6px;font-weight:900;color:#0b275b;font-size:20px;letter-spacing:.2px}
+  .subtitle{margin:0 0 18px;color:var(--muted);font-size:13px}
 
-  /* login box */
-  .login{
-    width:100%; max-width:420px;
-    background:var(--card-bg); border:1px solid var(--border);
-    border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,.25);
-    padding:24px; text-align:center;
+  /* Inputs & buttons */
+  .input{
+    width:100%;padding:12px 12px;margin:8px 0 10px;
+    border:1px solid var(--border);border-radius:10px;font-size:15px;background:#fff
   }
-  .login h2{margin:0 0 12px; color:#0b275b}
-  .login p{margin:8px 0 0; color:var(--muted); font-size:13px}
-  .login input{
-    width:100%; padding:12px; margin:10px 0;
-    border:1px solid var(--border); border-radius:10px; font-size:15px;
-    background:#fff;
-  }
-  .login input:focus{
-    outline:none; border-color:var(--brand);
-    box-shadow:0 0 0 4px rgba(11,92,171,.12);
-  }
-  .login button{
-    width:100%; padding:12px; border:none; border-radius:10px;
-    background:var(--brand); color:#fff; font-weight:800; cursor:pointer;
-  }
-  .login button:hover{ background:var(--brand-dark) }
-
-  /* table */
-  .tablewrap{overflow:auto}
-  table{width:100%; border-collapse:collapse}
-  th, td{padding:12px 14px; text-align:left}
-  th{
-    background:#f5f7ff; color:#0a2c6a; font-weight:800; font-size:13px;
-    border-bottom:1px solid var(--border);
-    position:sticky; top:0; z-index:1;
-  }
-  td{ border-bottom:1px solid var(--border); font-size:14px; vertical-align:top; }
-  tr:hover td{ background:#fafcff; }
-
-  .status{display:inline-block; padding:6px 10px; border-radius:999px; font-weight:700; font-size:12px}
-  .status.approved{ background:#d4edda; color:#155724 }
-  .status.rejected{ background:#f8d7da; color:#721c24 }
-  .status.pending{  background:#fff3cd; color:#6b5f00 }
-
-  .actions{display:flex; gap:8px}
+  .input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 4px rgba(11,92,171,.12)}
   .btn{
-    padding:8px 12px; border:none; border-radius:10px; font-weight:800; color:#fff; cursor:pointer;
+    width:100%;padding:12px;border:none;border-radius:12px;
+    background:var(--brand);color:#fff;font-weight:800;cursor:pointer;font-size:15px
   }
-  .btn.approve{ background:var(--success) }
-  .btn.reject{ background:var(--danger) }
-  .btn[disabled]{ opacity:.6; cursor:not-allowed }
+  .btn:hover{background:var(--brand-dark)}
+  .muted{color:var(--muted);font-size:13px;margin-top:8px}
 
-  .muted{ color:var(--muted); font-size:13px }
+  /* Top-right logout */
+  .logout-btn{
+    position:absolute;top:20px;right:20px;
+    background:var(--brand-dark);color:#fff;border:none;border-radius:10px;
+    padding:8px 14px;font-weight:700;cursor:pointer;display:none
+  }
+  .logout-btn:hover{background:#062f68}
+
+  /* Sheet button */
+  .sheet-btn{
+    margin-top:18px;padding:14px 18px;border:none;border-radius:12px;
+    background:var(--brand);color:#fff;font-weight:900;font-size:16px;cursor:pointer;
+    box-shadow:0 6px 18px rgba(0,0,0,.18)
+  }
+  .sheet-btn:hover{background:var(--brand-dark)}
 </style>
 </head>
 <body>
 <div class="overlay" aria-hidden="true"></div>
 
+<!-- LOGIN VIEW -->
 <div class="page" id="loginView">
-  <div class="login">
-    <h2>Admin Login</h2>
-    <input id="username" placeholder="Username" />
-    <input id="password" type="password" placeholder="Password" />
-    <button onclick="login()">Login</button>
+  <div class="card">
+    <h1 class="title">Admin Login</h1>
+    <p class="subtitle">HNBU Medical Education University</p>
+    <input id="username" class="input" placeholder="Username" autocomplete="username" />
+    <input id="password" class="input" type="password" placeholder="Password" autocomplete="current-password" />
+    <button class="btn" onclick="login()">Login</button>
     <p id="msg" class="muted"></p>
   </div>
 </div>
 
+<!-- DASHBOARD VIEW (just open sheet button) -->
+<button class="logout-btn" id="logoutBtn" onclick="logout()">Logout</button>
 <div class="page" id="dashView" style="display:none;">
   <div class="card">
-    <div class="card-header">
-      <h1 class="title">HNBU Medical Education University — Requests</h1>
-      <button class="logout" onclick="logout()">Logout</button>
-    </div>
-    <div class="tablewrap">
-      <table id="dataTable">
-        <thead>
-          <tr>
-            <th>Roll No</th>
-            <th>Student</th>
-            <th>Course / Year</th>
-            <th>Email</th>
-            <th>Status</th>
-            <th>Requested</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody><tr><td colspan="7" class="muted">Loading…</td></tr></tbody>
-      </table>
-    </div>
+    <h1 class="title">Welcome, Admin 👋</h1>
+    <p class="subtitle">Open the full Google Sheet of requests.</p>
+    <button class="sheet-btn" onclick="openSheet()">📄 Open Google Sheet</button>
   </div>
 </div>
 
 <script>
-/* === CONFIG === */
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwpNCp9hVPxDmt-E9_B_dcd29TrKVV54dmyH_25lnsC-ZneBZEFRr7F-yjsrq-Kkrrc_Q/exec";
-const ADMIN_KEY   = "admin123";    // must match Code.gs
-const ADMIN_USER  = "admin";
-const ADMIN_PASS  = "password";
+/* Basic credentials (change if you want) */
+const ADMIN_USER = "admin";
+const ADMIN_PASS = "password";
 
-/* === LOGIN FLOW === */
+/* 🔗 Add your Google Sheet URL here */
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/190WayDvCTglIXs8xX_fYoBDZakQ4OVcV2B-lJYBebdk/edit?usp=sharing";
+
+/* Login flow */
 function login(){
   const u = document.getElementById('username').value.trim();
   const p = document.getElementById('password').value.trim();
   const msg = document.getElementById('msg');
   if(u === ADMIN_USER && p === ADMIN_PASS){
-    sessionStorage.setItem('logged', '1');
+    sessionStorage.setItem('hnbumed_admin_logged','1');
     msg.textContent = "";
     showDashboard();
   } else {
     msg.textContent = "Invalid credentials.";
   }
 }
-function logout(){ sessionStorage.removeItem('logged'); location.reload(); }
-if(sessionStorage.getItem('logged') === '1') showDashboard();
 
-async function showDashboard(){
-  document.getElementById('loginView').style.display='none';
-  document.getElementById('dashView').style.display='flex';
-  await loadData(); // auto load once
+function logout(){
+  sessionStorage.removeItem('hnbumed_admin_logged');
+  location.reload();
 }
 
-/* === DATA === */
-let allData = [];
-
-async function loadData(){
-  const tbody = document.querySelector('#dataTable tbody');
-  tbody.innerHTML = `<tr><td colspan="7" class="muted">Loading…</td></tr>`;
-
-  try{
-    const fd = new FormData();
-    fd.append('action','getRequests');
-    fd.append('admin_key', ADMIN_KEY);
-
-    const res = await fetch(WEB_APP_URL, { method:'POST', body: fd });
-    const txt = await res.text();
-    let data;
-    try { data = JSON.parse(txt); } catch {
-      console.log('Server said:', txt);
-      tbody.innerHTML = `<tr><td colspan="7" class="muted">Invalid server response.</td></tr>`;
-      return;
-    }
-
-    const rows = data.data || [];
-    if (!data.success || rows.length === 0){
-      tbody.innerHTML = `<tr><td colspan="7" class="muted">${data.message || 'No records found.'}</td></tr>`;
-      allData = [];
-      return;
-    }
-
-    allData = rows;
-    render(allData);
-  }catch(err){
-    tbody.innerHTML = `<tr><td colspan="7" class="muted">Network error.</td></tr>`;
-  }
+function showDashboard(){
+  document.getElementById('loginView').style.display = 'none';
+  document.getElementById('dashView').style.display  = 'flex';
+  document.getElementById('logoutBtn').style.display = 'inline-block';
 }
 
-function escapeHTML(s){return (s||'').toString().replace(/[&<>"']/g,m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m]))}
+/* Auto-login restoration */
+if(sessionStorage.getItem('hnbumed_admin_logged') === '1'){
+  showDashboard();
+}
 
-function render(rows){
-  const tbody = document.querySelector('#dataTable tbody');
-  if(rows.length === 0){
-    tbody.innerHTML = `<tr><td colspan="7" class="muted">No requests found.</td></tr>`;
+/* Open sheet */
+function openSheet(){
+  if(!SHEET_URL || SHEET_URL === "PASTE_YOUR_GOOGLE_SHEET_LINK_HERE"){
+    alert("Please add your Google Sheet link in the code (SHEET_URL).");
     return;
   }
-  tbody.innerHTML = rows.map(r=>{
-    const status = (r.status || '').toString();
-    const stClass = status.toLowerCase().replace(/[^a-z]/g,''); // approved|rejected|pending
-    const when = r.requested_at ? new Date(r.requested_at).toLocaleString() : '-';
-    return `
-      <tr>
-        <td>${escapeHTML(r.roll_no)}</td>
-        <td><strong>${escapeHTML(r.name)}</strong><br><span class="muted">${escapeHTML(r.college_name || '')}</span></td>
-        <td>${escapeHTML(r.course)} / ${escapeHTML(r.passing_year)}</td>
-        <td>${escapeHTML(r.email)}</td>
-        <td><span class="status ${stClass}">${escapeHTML(status || 'Pending')}</span></td>
-        <td>${escapeHTML(when)}</td>
-        <td class="actions">
-          <button class="btn approve" onclick="updateStatus(${r.row}, 'Approved')">Approve</button>
-          <button class="btn reject"  onclick="updateStatus(${r.row}, 'Rejected')">Reject</button>
-        </td>
-      </tr>
-    `;
-  }).join('');
-}
-
-/* === ACTIONS === */
-async function updateStatus(row, status){
-  const remarks = prompt(`Remarks for ${status}:`) || '';
-  const fd = new FormData();
-  fd.append('action','update');
-  fd.append('admin_key', ADMIN_KEY);
-  fd.append('row', row);
-  fd.append('status', status);
-  fd.append('remarks', remarks);
-
-  // disable row buttons while updating
-  document.querySelectorAll('.btn.approve,.btn.reject').forEach(b=>b.disabled=true);
-
-  try{
-    const res = await fetch(WEB_APP_URL, { method:'POST', body: fd });
-    const j = await res.json().catch(()=>({success:false, message:'Bad JSON'}));
-    alert(j.message || (j.success ? 'Updated' : 'Failed'));
-    await loadData(); // refresh table data automatically
-  }catch(e){
-    alert('Network error.');
-  }finally{
-    document.querySelectorAll('.btn.approve,.btn.reject').forEach(b=>b.disabled=false);
-  }
+  window.open(SHEET_URL, '_blank', 'noopener');
 }
 </script>
 </body>
