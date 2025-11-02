@@ -43,6 +43,38 @@
   </style>
 </head>
 <body>
+  <!-- 🔹 Admin Login Button -->
+<a href="admin.html" id="adminBtn" title="Admin Login">Admin Login</a>
+
+<style>
+  #adminBtn {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    background: #0b5cab;
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: 0.2s;
+    z-index: 1000;
+  }
+  #adminBtn:hover {
+    background: #084c8e;
+    transform: translateY(-1px);
+  }
+  @media(max-width:600px){
+    #adminBtn {
+      font-size: 13px;
+      padding: 7px 12px;
+      top: 12px;
+      right: 12px;
+    }
+  }
+</style>
   <div class="bg"></div><div class="overlay"></div>
   <div class="page">
     <div class="header">
@@ -153,3 +185,4 @@
   </script>
 </body>
 </html>
+
