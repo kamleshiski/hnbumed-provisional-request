@@ -3,55 +3,218 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Panel – HNBU</title>
+<title>Admin Dashboard | HNBU Medical Education University</title>
+
 <style>
-  body{font-family:Arial, sans-serif;background:#f4f6fb;margin:0;padding:20px}
-  .login, .dashboard{max-width:600px;margin:50px auto;background:#fff;padding:20px;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,0.1);}
-  h2{margin-top:0;color:#0b5cab}
-  input,button{width:100%;padding:10px;margin:8px 0;font-size:15px}
-  button{background:#0b5cab;color:#fff;border:none;cursor:pointer;border-radius:6px}
-  button:hover{background:#094c8e}
-  table{width:100%;border-collapse:collapse;margin-top:20px}
-  th,td{border:1px solid #ddd;padding:8px;text-align:left}
-  th{background:#0b5cab;color:#fff}
-  tr:nth-child(even){background:#f2f2f2}
+  :root {
+    --brand: #0b5cab;
+    --brand-dark: #084c8e;
+    --success: #28a745;
+    --danger: #dc3545;
+    --pending: #ffc107;
+    --light-bg: #f5f8ff;
+  }
+  body {
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+    margin: 0;
+    background: var(--light-bg);
+    color: #222;
+  }
+  header {
+    background: var(--brand);
+    color: #fff;
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  header h1 {
+    margin: 0;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+  }
+  header button {
+    background: #fff;
+    color: var(--brand-dark);
+    border: none;
+    border-radius: 6px;
+    padding: 6px 14px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  header button:hover {
+    background: var(--brand-dark);
+    color: #fff;
+  }
+  .container {
+    max-width: 1100px;
+    margin: 30px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    padding: 20px;
+  }
+  h2 {
+    margin-top: 0;
+    color: var(--brand);
+  }
+  input, button {
+    font-family: inherit;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+  }
+  th, td {
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: left;
+    font-size: 14px;
+  }
+  th {
+    background: #eef4ff;
+    color: var(--brand-dark);
+    font-weight: 600;
+  }
+  tr:hover {
+    background: #f9fbff;
+  }
+  .status {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+  }
+  .status.pending { background: var(--pending); color: #000; }
+  .status.approved { background: #d4edda; color: #155724; }
+  .status.rejected { background: #f8d7da; color: #721c24; }
+  .btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    color: #fff;
+  }
+  .btn.approve { background: var(--success); }
+  .btn.reject { background: var(--danger); }
+  .btn.approve:hover { background: #218838; }
+  .btn.reject:hover { background: #c82333; }
+  .search-bar {
+    margin-bottom: 10px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .search-bar input {
+    flex: 1;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  .login {
+    max-width: 360px;
+    margin: 100px auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  .login h2 {
+    margin-bottom: 20px;
+    color: var(--brand);
+  }
+  .login input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  .login button {
+    background: var(--brand);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px;
+    width: 100%;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .login button:hover {
+    background: var(--brand-dark);
+  }
+  .muted {
+    color: #888;
+    font-size: 13px;
+  }
 </style>
 </head>
 <body>
 
-<div class="login" id="loginBox">
+<header>
+  <h1>HNBU Medical Education University — Admin Dashboard</h1>
+  <button onclick="logout()">Logout</button>
+</header>
+
+<div id="loginBox" class="login">
   <h2>Admin Login</h2>
-  <input id="username" placeholder="Username" required>
-  <input id="password" type="password" placeholder="Password" required>
+  <input id="username" placeholder="Username" />
+  <input id="password" type="password" placeholder="Password" />
   <button onclick="login()">Login</button>
-  <p id="msg" style="color:red"></p>
+  <p id="msg" class="muted"></p>
 </div>
 
-<div class="dashboard" id="dashboard" style="display:none;">
-  <h2>Requests Dashboard</h2>
-  <button onclick="logout()" style="float:right;">Logout</button>
-  <table id="dataTable">
-    <thead>
-      <tr><th>Roll No</th><th>Name</th><th>Email</th><th>Status</th><th>Action</th></tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+<div id="dashboard" style="display:none;">
+  <div class="container">
+    <h2>Student Requests</h2>
+    <div class="search-bar">
+      <input id="search" placeholder="Search by roll no, name, or email">
+      <button onclick="loadData()" class="btn approve" style="background:var(--brand);">🔄 Refresh</button>
+    </div>
+
+    <table id="dataTable">
+      <thead>
+        <tr>
+          <th>Roll No</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Course / Year</th>
+          <th>Status</th>
+          <th>Requested</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody><tr><td colspan="7">Loading...</td></tr></tbody>
+    </table>
+  </div>
 </div>
 
 <script>
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwpNCp9hVPxDmt-E9_B_dcd29TrKVV54dmyH_25lnsC-ZneBZEFRr7F-yjsrq-Kkrrc_Q/exec"; // <-- paste your /exec link
-const ADMIN_KEY = "admin123"; // same as Code.gs
+/* ⚙️ CONFIG */
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwpNCp9hVPxDmt-E9_B_dcd29TrKVV54dmyH_25lnsC-ZneBZEFRr7F-yjsrq-Kkrrc_Q/exec"; // <-- Paste your Google Apps Script URL
+const ADMIN_KEY = "admin123"; // must match Code.gs
 const ADMIN_USER = "admin";
 const ADMIN_PASS = "password";
 
+/* 🧠 LOGIN LOGIC */
 function login(){
   const u = document.getElementById('username').value.trim();
   const p = document.getElementById('password').value.trim();
+  const msg = document.getElementById('msg');
   if(u === ADMIN_USER && p === ADMIN_PASS){
     sessionStorage.setItem('logged', '1');
+    msg.textContent = "";
     showDashboard();
   } else {
-    document.getElementById('msg').textContent = "Invalid credentials.";
+    msg.textContent = "Invalid credentials.";
   }
 }
 
@@ -62,41 +225,68 @@ function logout(){
 
 if(sessionStorage.getItem('logged') === '1') showDashboard();
 
+/* 🧾 DASHBOARD */
 async function showDashboard(){
   document.getElementById('loginBox').style.display='none';
   document.getElementById('dashboard').style.display='block';
-  loadRequests();
+  loadData();
 }
 
-async function loadRequests(){
-  const url = `${WEB_APP_URL}?admin_key=${ADMIN_KEY}`;
-  const res = await fetch(url);
-  const data = await res.json();
-  const tbody = document.querySelector('#dataTable tbody');
-  tbody.innerHTML = '';
+document.getElementById('search').addEventListener('input', ()=> filterData());
 
-  if(!data.success){ 
-    tbody.innerHTML = `<tr><td colspan='5'>${data.message}</td></tr>`;
+let allData = [];
+
+async function loadData(){
+  const tbody = document.querySelector('#dataTable tbody');
+  tbody.innerHTML = "<tr><td colspan='7'>Loading...</td></tr>";
+  try {
+    const res = await fetch(`${WEB_APP_URL}?admin_key=${ADMIN_KEY}`);
+    const data = await res.json();
+    if(!data.success){ tbody.innerHTML = `<tr><td colspan='7'>${data.message}</td></tr>`; return; }
+    allData = data.data || [];
+    render(allData);
+  } catch {
+    tbody.innerHTML = "<tr><td colspan='7'>Error loading data.</td></tr>";
+  }
+}
+
+function filterData(){
+  const q = document.getElementById('search').value.toLowerCase();
+  const filtered = allData.filter(r => 
+    (r.roll_no + r.name + r.email).toLowerCase().includes(q)
+  );
+  render(filtered);
+}
+
+function render(rows){
+  const tbody = document.querySelector('#dataTable tbody');
+  if(rows.length === 0){
+    tbody.innerHTML = "<tr><td colspan='7'>No requests found.</td></tr>";
     return;
   }
 
-  data.data.forEach(r=>{
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
+  tbody.innerHTML = rows.map(r=>{
+    const stClass = r.status.toLowerCase();
+    const when = r.requested_at ? new Date(r.requested_at).toLocaleString() : '-';
+    return `
+    <tr>
       <td>${r.roll_no}</td>
       <td>${r.name}</td>
       <td>${r.email}</td>
-      <td>${r.status}</td>
+      <td>${r.course} (${r.year})</td>
+      <td><span class="status ${stClass}">${r.status}</span></td>
+      <td>${when}</td>
       <td>
-        <button onclick="updateStatus(${r.row}, 'Approved')">Approve</button>
-        <button onclick="updateStatus(${r.row}, 'Rejected')">Reject</button>
-      </td>`;
-    tbody.appendChild(tr);
-  });
+        <button class="btn approve" onclick="updateStatus(${r.row}, 'Approved')">Approve</button>
+        <button class="btn reject" onclick="updateStatus(${r.row}, 'Rejected')">Reject</button>
+      </td>
+    </tr>`;
+  }).join('');
 }
 
+/* 🟢 APPROVE / REJECT */
 async function updateStatus(row, status){
-  const remarks = prompt("Any remarks?") || '';
+  const remarks = prompt(`Remarks for ${status}:`) || '';
   const fd = new FormData();
   fd.append('action','update');
   fd.append('admin_key', ADMIN_KEY);
@@ -104,10 +294,10 @@ async function updateStatus(row, status){
   fd.append('status', status);
   fd.append('remarks', remarks);
 
-  const res = await fetch(WEB_APP_URL, {method:'POST', body:fd});
+  const res = await fetch(WEB_APP_URL, { method: 'POST', body: fd });
   const data = await res.json();
   alert(data.message);
-  loadRequests();
+  loadData();
 }
 </script>
 </body>
